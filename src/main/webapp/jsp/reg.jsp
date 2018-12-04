@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@include file="./index_top.jsp"%>
+<%@include file="./navframe.jsp"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -24,10 +26,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
 
   <body>
-  <center>
-<jsp:include page="index_top.jsp"></jsp:include>
-<jsp:include page="navframe.jsp"></jsp:include>
-</center>
   <form onsubmit="return ck()" method="get" name=f1 action="./common/register.do">
    <TABLE border=0 cellSpacing=0 cellPadding=0 width=720 align=center height=282>
   <TBODY>
@@ -62,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <TR>
                 <TD height=40 width="41%" align=right>姓名： </TD>
                 <TD height=40 width="59%"><INPUT id=tname class=inputtxt
-                  type=text name=tname></TD>
+                  type=text name=tname>&nbsp&nbsp&nbsp&nbsp&nbsp</TD>
               </TR>
               <TR>
                 <TD height=40 width="41%" align=right>性别： </TD>
@@ -76,17 +74,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <TR>
                 <TD height=40 width="41%" align=right>年龄： </TD>
                 <TD height=40 width="59%"><INPUT id=age class=inputtxt
-                  type=text name=age></TD>
+                  type=text name=age>&nbsp&nbsp&nbsp&nbsp&nbsp</TD>
               </TR>
               <TR>
                 <TD height=40 width="41%" align=right>电话： </TD>
                 <TD height=40 width="59%"><INPUT id=tel class=inputtxt
-                  type=text name=tel></TD>
+                  type=text name=tel>&nbsp&nbsp&nbsp&nbsp&nbsp</TD>
               </TR>
               <TR>
                 <TD height=40 width="41%" align=right>身份证： </TD>
                 <TD height=40 width="59%"><INPUT id=idcard class=inputtxt
-                  type=text name=idcard></TD>
+                  type=text name=idcard>&nbsp&nbsp&nbsp&nbsp&nbsp</TD>
               </TR>
               <TR align=middle>
                 <TD height=28 colSpan=2><INPUT class=Btn value=注册 type=submit name=Submit>
@@ -137,8 +135,6 @@ if(suc!=null)
 location.replace("/Demo/index.jsp");
  <%}%>
   </script>
-  <center>
-<jsp:include page="index_bottom.jsp"></jsp:include>
-</center>
+  <%@include file="./index_bottom.jsp"%>
   </body>
 </html>

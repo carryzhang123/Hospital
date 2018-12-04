@@ -63,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </html>
 <script type="text/javascript">
   function jump() {
-      window.location.href='./jsp/searchks.jsp';
+      window.location.href='./jsp/search_type.jsp';
   }
 
 </script>

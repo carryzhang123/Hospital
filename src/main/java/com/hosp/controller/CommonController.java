@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class CommonController {
             commonDao.commOper(sql);
             request.setAttribute("suc", "");
         }
-        return "/jsp/reg";
+        return "/jsp/reg.jsp";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -53,7 +54,7 @@ public class CommonController {
         } else {
             request.setAttribute("no", "");
         }
-        return "/index";
+        return "/index.jsp";
     }
 
     /**
@@ -81,7 +82,7 @@ public class CommonController {
             commonDao.commOper(sql);
             request.setAttribute("suc", "");
         }
-        return "/jsp/patient_info";
+        return "/jsp/patient_info.jsp";
     }
 
     /**
@@ -92,6 +93,27 @@ public class CommonController {
     @RequestMapping(value = "/logoutPatient", method = RequestMethod.GET)
     public String logoutPatient() {
         request.getSession().removeAttribute("user");
-        return "/jsp/newscenter";
+        return "/jsp/newscenter.jsp";
+    }
+
+
+    /**
+     * 预约挂号
+     *
+     * @return
+     */
+    @RequestMapping(value = "/registerDoctor", method = RequestMethod.GET)
+    public String registerDoctor(String doctorId, String time) {
+        HashMap user = (HashMap) request.getSession().getAttribute("user");
+
+        String uid = user.get("id").toString();
+        ArrayList cklist = (ArrayList) commonDao.select("select * from h_p where h_doctor='" + doctorId + "' and rq='" + time + "' and h_user='" + uid + "'");
+        if (cklist.size() > 0) {
+            request.setAttribute("no", "");
+        } else {
+            commonDao.commOper("insert into h_p (h_doctor,rq,h_user,status) values ('" + doctorId + "','" + time + "','" + uid + "','待诊') ");
+            request.setAttribute("suc", "");
+        }
+        return "/jsp/doctor_plans.jsp?ysid=" + doctorId;
     }
 }

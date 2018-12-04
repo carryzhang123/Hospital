@@ -45,4 +45,4 @@
               for(HashMap map:list){%>
               <TR bordercolor="#ffffff">
                 <TD align=right >
-                <a href="ksinfo.jsp?id=<%=map.get("
+                <a href="doctor_info.jsp?id=<%=map.get("

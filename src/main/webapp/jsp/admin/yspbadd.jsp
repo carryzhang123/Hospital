@@ -117,7 +117,7 @@ if(suc!=null)
 {
  %>
  alert("操作成功");
-location.replace("/Demo/admin/yspb.jsp");
+location.replace("/Demo/admin/doctor_plans.jsp");
  <%}%>
 </script>
   </body>

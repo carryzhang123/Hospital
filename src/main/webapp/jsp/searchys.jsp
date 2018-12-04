@@ -56,21 +56,7 @@
               i++;%>
               
                 <TD align=right >
-                <a href="yspb.jsp?ysid=<%=map1.get(" #ffffff">
-                                <%
-                                }
-                                }
-                                 %>
-                </TR>
-                
-                
-                
-              </TBODY></TABLE></TD></TR>
-              </TBODY></TABLE></TD></TR>
- </TBODY></TABLE>
-  </center>
-
-    <script type="text/javascript">
+                <a href="doctor_plans.jsp?ysid=<%=map1.get(" text/javascript">
   	
   	<%
 String no = (String)request.getAttribute("no");

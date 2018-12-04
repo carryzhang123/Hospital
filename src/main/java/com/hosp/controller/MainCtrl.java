@@ -434,11 +434,11 @@ public class MainCtrl extends HttpServlet {
 			ArrayList cklist = (ArrayList)dao.select("select * from yy where ysid='"+ysid+"' and rq='"+rq+"' and uid='"+uid+"'");
 			if(cklist.size()>0){
 				request.setAttribute("no", "");
-		    	go("/yspb.jsp?ysid="+ysid, request, response);
+		    	go("/doctor_plans.jsp?ysid="+ysid, request, response);
 			}else{
 				dao.commOper("insert into yy (ysid,rq,uid,status) values ('"+ysid+"','"+rq+"','"+uid+"','待诊') ");
 				request.setAttribute("suc", "");
-		    	go("/yspb.jsp?ysid="+ysid, request, response);
+		    	go("/doctor_plans.jsp?ysid="+ysid, request, response);
 			}
 		}
 	dao.close();
