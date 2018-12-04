@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@include file="./index_top.jsp"%>
+<%@include file="./navframe.jsp"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -24,12 +26,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body topMargin=0>
-<center>
-<jsp:include page="index_top.jsp"></jsp:include>
-<jsp:include page="navframe.jsp"></jsp:include>
-</center>
-   <TABLE border=0 cellSpacing=0 cellPadding=0 width=700 align=center>
-  <TBODY>
+   <table border=0 cellSpacing=0 cellPadding=0 width=700 align=center>
+  <tbody>
   <TR>
     <TD height=30 width=681 align=middle>　<SPAN 
   class=style2>网上挂号须知</SPAN></TD></TR>
@@ -58,11 +56,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   )</P></TD></TR>
   <TR>
     <TD height=18>　挂号处咨询电话：020-61641888-87104 </TD></TR>
-  <TR>
-    <TD height=19 align=middle><INPUT class=Btn onclick="javascript:location.href('searchks.jsp');" value=进入预约 type=button name=Submit></TD></TR></TBODY></TABLE>
-  
-<center>
-<jsp:include page="index_bottom.jsp"></jsp:include>
-</center>
+  <tr>
+    <td height=19 align="middle"><input class="Btn" onclick="jump();" value="进入预约" type="button" name="Submit"></td></tr></tbody></table>
+<%@include file="./index_bottom.jsp"%>
   </body>
 </html>
+<script type="text/javascript">
+  function jump() {
+      window.location.href='./jsp/searchks.jsp';
+  }
+
+</script>

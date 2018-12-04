@@ -8,12 +8,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
+
     <title>医院网上预约系统</title>
-    
+
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-java.control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="expires" content="0">
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<!--
@@ -22,46 +22,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <LINK rel=stylesheet type=text/css href="files/exp_book_login_files/css.css">
 
   </head>
-  
+
   <body>
   <center>
 <jsp:include page="index_top.jsp"></jsp:include>
 <jsp:include page="navframe.jsp"></jsp:include>
 </center>
-  <form onsubmit="return ck()" method="get" name=f1 action="./doctor/add.do">
+  <form onsubmit="return ck()" method="get" name=f1 action="./common/register.do">
    <TABLE border=0 cellSpacing=0 cellPadding=0 width=720 align=center height=282>
   <TBODY>
   <TR>
     <TD class=lfont  align=top><B>用户注册</B></TD></TR>
   <TR>
     <TD height=170 align=middle>
-      <TABLE border=1 cellSpacing=0 borderColor=#bdbfbd borderColorDark=#ffffff 
+      <TABLE border=1 cellSpacing=0 borderColor=#bdbfbd borderColorDark=#ffffff
       cellPadding=0 width="100%" align=center height=170>
-        
+
         <TBODY>
         <TR>
           <TD height=168 vAlign=top align=middle>
-            <TABLE border=0 cellSpacing=0 cellPadding=0 width="100%" 
+            <TABLE border=0 cellSpacing=0 cellPadding=0 width="100%"
               height=130><TBODY>
               <TR>
                 <TD height=40 width="41%" align=right>
                   <P>登陆名： </P></TD>
-                <TD height=40 width="59%"><INPUT id=uname class=inputtxt 
+                <TD height=40 width="59%"><INPUT id=uname class=inputtxt
                   name=uname> <IMG src="./jsp/files/exp_book_login_files/user_id.gif"
                   width=15 height=16> </TD></TR>
               <TR>
                 <TD height=40 width="41%" align=right>密码： </TD>
-                <TD height=40 width="59%"><INPUT id=upass class=inputtxt 
+                <TD height=40 width="59%"><INPUT id=upass class=inputtxt
                   type=password name=upass> <IMG
                         src="./jsp/files/exp_book_login_files/psw.gif" width=15 height=16> </TD></TR>
               <TR>
                 <TD height=40 width="41%" align=right>再次输入密码： </TD>
-                <TD height=40 width="59%"><INPUT id=upass1 class=inputtxt 
+                <TD height=40 width="59%"><INPUT id=upass1 class=inputtxt
                   type=password name=upass1> <IMG
                         src="./jsp/files/exp_book_login_files/psw.gif" width=15 height=16> </TD></TR>
               <TR>
                 <TD height=40 width="41%" align=right>姓名： </TD>
-                <TD height=40 width="59%"><INPUT id=tname class=inputtxt 
+                <TD height=40 width="59%"><INPUT id=tname class=inputtxt
                   type=text name=tname></TD>
               </TR>
               <TR>
@@ -75,21 +75,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </TR>
               <TR>
                 <TD height=40 width="41%" align=right>年龄： </TD>
-                <TD height=40 width="59%"><INPUT id=age class=inputtxt 
+                <TD height=40 width="59%"><INPUT id=age class=inputtxt
                   type=text name=age></TD>
               </TR>
               <TR>
                 <TD height=40 width="41%" align=right>电话： </TD>
-                <TD height=40 width="59%"><INPUT id=tel class=inputtxt 
+                <TD height=40 width="59%"><INPUT id=tel class=inputtxt
                   type=text name=tel></TD>
               </TR>
               <TR>
                 <TD height=40 width="41%" align=right>身份证： </TD>
-                <TD height=40 width="59%"><INPUT id=idcard class=inputtxt 
+                <TD height=40 width="59%"><INPUT id=idcard class=inputtxt
                   type=text name=idcard></TD>
               </TR>
               <TR align=middle>
-                <TD height=28 colSpan=2><INPUT class=Btn value=注册 type=submit name=Submit> 
+                <TD height=28 colSpan=2><INPUT class=Btn value=注册 type=submit name=Submit>
                 </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR>
  </TBODY></TABLE>
   </form>

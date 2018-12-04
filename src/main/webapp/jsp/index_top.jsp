@@ -32,7 +32,7 @@
     <TR>
         <TH scope=row>
             <%
-                HashMap user = (HashMap) session.getAttribute("user");
+                HashMap topUser = (HashMap) session.getAttribute("topUser");
             %>
             <form action="searchys.jsp?f=f" method="post">
                 <TABLE  style="margin: 0 auto" border=0 align=right>
@@ -52,7 +52,7 @@
                                 href="./jsp/newscenter.jsp">新闻中心</A></TD>
                         <TD vAlign=center width=71>|&gt;<A
                                 href="./jsp/yyjj.jsp">医院简介</A></TD>
-                        <%if (user == null) { %>
+                        <%if (topUser == null) { %>
                         <TD vAlign=center width=71>|&gt;<A
                                 href="./index.jsp">用户登陆</A></TD>
                         <TD vAlign=center width=71>|&gt;<A
@@ -63,7 +63,7 @@
                         <TD vAlign=center width=71>|&gt;<A
                                 href="./jsp/myyy.jsp">我的预约</A></TD>
                         <TD vAlign=center width=71>|&gt;<A
-                                href="./jsp/grinfo.jsp">个人信息</A></TD>
+                                href="./jsp/patient_info.jsp">个人信息</A></TD>
                         <TD vAlign=center width=51>|&gt;<A
                                 href="/Demo/tms?ac=bexit"
                         >注销</A></TD>

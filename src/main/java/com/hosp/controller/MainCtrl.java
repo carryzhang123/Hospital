@@ -354,7 +354,7 @@ public class MainCtrl extends HttpServlet {
 			    if(!oldupass.equals(map.get("upass")))
 			    {
 			    	request.setAttribute("no", "");
-			    	go("/grinfo.jsp", request, response);
+			    	go("/patient_info.jsp", request, response);
 			    }else{
 			    String upass = request.getParameter("upass1");
 			    String tname = request.getParameter("tname");
@@ -365,7 +365,7 @@ public class MainCtrl extends HttpServlet {
 			    String sql = "update br set upass='"+upass+"',tname='"+tname+"',sex='"+sex+"',age='"+age+"',tel='"+tel+"',idcard='"+idcard+"' where id="+user.get("id");
 			    dao.commOper(sql);
 		    	request.setAttribute("suc", "");
-		    	go("/grinfo.jsp", request, response);
+		    	go("/patient_info.jsp", request, response);
 			    }
 		}
 		//病人注销 

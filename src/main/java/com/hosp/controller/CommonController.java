@@ -1,8 +1,6 @@
 package com.hosp.controller;
 
-import com.hosp.dao.CommDAO;
 import com.hosp.dao.CommonDao;
-import com.hosp.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -19,6 +17,7 @@ import java.util.List;
  * @create 2018-12-02 23:14
  **/
 @Controller
+@RequestMapping("/common")
 public class CommonController {
 
     @Autowired
@@ -32,23 +31,21 @@ public class CommonController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register(String uname, String upass, String tname, String sex, String age, String tel, String idcard) {
-        CommDAO dao = new CommDAO();
-        String csql = "select * from br where uname='" + uname + "'";
-        jdbcTemplate.execute(csql);
-        if (dao.select(csql).size() > 0) {
+        String csql = "select * from t_user where uname='" + uname + "'";
+        if (commonDao.select(csql).size() > 0) {
             request.setAttribute("no", "");
         } else {
-            String sql = "insert into br (uname,upass,tname,sex,age,tel,isblack,delstatus,idcard) values('" + uname + "','" + upass + "','" + tname + "','" + sex + "','" + age + "','" + tel + "','no','0','" + idcard + "')";
-            dao.commOper(sql);
+            String sql = "insert into h_user (uname,upass,tname,sex,age,tel,isblack,delstatus,idcard) values('" + uname + "','" + upass + "','" + tname + "','" + sex + "','" + age + "','" + tel + "','no','0','" + idcard + "')";
+            commonDao.commOper(sql);
             request.setAttribute("suc", "");
         }
-        return "reg";
+        return "/jsp/reg";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(String uname, String upass) {
         HttpSession session = request.getSession();
-        String sql = "select * from br where uname='" + uname + "' and upass='" + upass + "' and isblack='no' and delstatus='0'  ";
+        String sql = "select * from h_user where uname='" + uname + "' and upass='" + upass + "' and isblack='no' and delstatus='0'  ";
         List<HashMap> list = commonDao.select(sql);
         if (list.size() == 1) {
             session.setAttribute("user", list.get(0));
@@ -56,6 +53,45 @@ public class CommonController {
         } else {
             request.setAttribute("no", "");
         }
-        return "index";
+        return "/index";
+    }
+
+    /**
+     * 病人修改个人信息
+     *
+     * @param uname
+     * @param oldupass
+     * @param upass
+     * @param tname
+     * @param sex
+     * @param age
+     * @param tel
+     * @param idcard
+     * @return
+     */
+    @RequestMapping(value = "/updatePatient", method = RequestMethod.GET)
+    public String updatePatient(String uname, String oldupass, String upass, String tname, String sex, String age, String tel, String idcard) {
+        HashMap user = (HashMap) request.getSession().getAttribute("user");
+        String csql = "select * from h_user where id='" + user.get("id") + "'";
+        HashMap map = commonDao.select(csql).get(0);
+        if (!oldupass.equals(map.get("upass"))) {
+            request.setAttribute("no", "");
+        } else {
+            String sql = "update h_user set upass='" + upass + "',tname='" + tname + "',sex='" + sex + "',age='" + age + "',tel='" + tel + "',idcard='" + idcard + "' where id=" + user.get("id");
+            commonDao.commOper(sql);
+            request.setAttribute("suc", "");
+        }
+        return "/jsp/patient_info";
+    }
+
+    /**
+     * 病人注销
+     *
+     * @return
+     */
+    @RequestMapping(value = "/logoutPatient", method = RequestMethod.GET)
+    public String logoutPatient() {
+        request.getSession().removeAttribute("user");
+        return "/jsp/newscenter";
     }
 }

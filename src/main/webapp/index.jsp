@@ -19,12 +19,12 @@
     <%
         HashMap user1 = (HashMap) session.getAttribute("user");
         if (user1 != null) {
-            response.sendRedirect("readme.jsp");
+            response.sendRedirect("./jsp/readme.jsp");
         } else {
     %>
 </center>
 <TABLE  style="margin: 0 auto" border=0 cellSpacing=0 cellPadding=0 width=720 height=282>
-<form onsubmit="return ck()" method="get" name="f1" action="./login.do">
+<form onsubmit="return ck()" method="get" name="f1" action="./common/login.do">
             <TBODY>
             <TR>
                 <TD class=lfont align=middle><B>预约挂号用户登陆</B></TD>
