@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="java.dao.CommDAO"%>
-<%@page import="java.util.Info"%>
-<%@page import="java.util.PageManager"%>
+<%@page import="com.hosp.dao.CommDAO"%>
+<%@page import="com.hosp.util.Info"%>
+<%@page import="com.hosp.util.PageManager"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -11,9 +11,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
-    <title>My JSP 'right.jsp' starting page</title>
-    
+
+      <title>预约挂号系统管理平台</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-java.control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -35,17 +34,17 @@ body {
 -->
 </style>
   </head>
-  <%CommDAO java.com.hosp.dao = new CommDAO();
+  <%CommDAO dao = new CommDAO();
   HashMap admin = (HashMap)session.getAttribute("admin"); 
-	 String sql = "select * from yspb where 1=1 and ysid='"+admin.get("id")+"'  ";
-	 String url = "/Demo/admin/mypb.jsp?1=1";
+	 String sql = "select * from h_d_orders where 1=1 and hdoctor='"+admin.get("id")+"'  ";
+	 String url = "./jsp/admin/mypb.jsp?1=1";
 	 String key = request.getParameter("key")==null?"":request.getParameter("key");
 	 String key1 = request.getParameter("key1")==null?"":request.getParameter("key1");
 	 String key2 = request.getParameter("key2")==null?"":request.getParameter("key2");
 	 String f = request.getParameter("f");
 	 if(f==null)
 	 {
-	 key = Info.getUTFStr(key);
+//	 key = Info.getUTFStr(key);
 	 }
 	 if(!key1.equals(""))
 	 {
@@ -59,7 +58,7 @@ body {
 	 sql+=" order by rq desc";
 %>
   <body>
-  <form action="admin/mypb.jsp?f=f" method="post">
+  <form action="./jsp/admin/mypb.jsp?f=f" method="post">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td height="30"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -84,12 +83,12 @@ body {
   </tr>
   <tr>
     <td><table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#c9c9c9">
-    <th colspan="2"><span class="STYLE1">
-    起止时间：<input type="text" id="key1" name="key1" value="<%=key1 %>" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>-
-                 <input type="text" id="key2" name="key2" value="<%=key2 %>" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
-   <input type="submit" value="查询" /></span>
-   <script type="text/javascript" src="/Demo/js/calendar/WdatePicker.js"></script>
-    </th>
+    <%--<th colspan="2"><span class="STYLE1">--%>
+    <%--起止时间：<input type="text" id="key1" name="key1" value="<%=key1 %>" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>---%>
+                 <%--<input type="text" id="key2" name="key2" value="<%=key2 %>" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>--%>
+   <%--<input type="submit" value="查询" /></span>--%>
+   <%--<script type="text/javascript" src="./hospital/jsp/js/calendar/WdatePicker.js"></script>--%>
+    <%--</th>--%>
       <tr>
         <td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">日期</span></strong></div></td>
         <td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">接诊数</span></strong></div></td>
@@ -97,15 +96,15 @@ body {
       <%String did = request.getParameter("did");
    if(did!=null)
    {
-com.hosp.dao.commOper("delete from yspb where id="+did);
+dao.commOper("delete from h_d_orders where id="+did);
    }
    PageManager pageManager = PageManager.getPage(url,10, request);
    pageManager.doList(sql);
    PageManager bean= (PageManager)request.getAttribute("page");
    ArrayList<HashMap> nlist=(ArrayList)bean.getCollection();
    	for(HashMap mstu:nlist){
-   		HashMap ym=com.hosp.dao.select("select * from sysuser where id="+mstu.get("ysid")).get(0);
-   		HashMap km=com.hosp.dao.select("select * from ks where id="+ym.get("ks")).get(0);
+   		HashMap ym=dao.select("select * from h_doctor where id="+mstu.get("hdoctor")).get(0);
+   		HashMap km=dao.select("select * from h_type where id="+ym.get("htype")).get(0);
 	    %>
       <tr>
         <td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3"><%=mstu.get("rq") %></span></div></td>

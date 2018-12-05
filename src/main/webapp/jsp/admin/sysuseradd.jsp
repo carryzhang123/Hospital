@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="java.dao.CommDAO"%>
-<%@page import="java.util.Info"%>
-<%@page import="java.util.PageManager"%>
+<%@page import="com.hosp.dao.CommDAO"%>
+<%@page import="com.hosp.util.Info"%>
+<%@page import="com.hosp.util.PageManager"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -11,9 +11,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
-    <title>My JSP 'right.jsp' starting page</title>
-    
+
+      <title>预约挂号系统管理平台</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-java.control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -37,7 +36,7 @@ body {
   </head>
   
   <body>
-  <form action="/Demo/tms?ac=sysuseradd" method="post" name="f1" onsubmit="return ck()" enctype="multipart/form-data">
+  <form action="./common/doctorAdd.do" method="get" name="f1" onsubmit="return ck()" enctype="multipart/form-data">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td>
@@ -95,8 +94,8 @@ body {
         	<div><span class="STYLE3">
         		<select id="ks" name="ks">
         			<%
-        			CommDAO java.com.hosp.dao = new CommDAO();
-        			ArrayList<HashMap> list = (ArrayList)com.hosp.dao.select("select * from ks where delstatus=0");
+        			CommDAO dao = new CommDAO();
+        			ArrayList<HashMap> list = (ArrayList)dao.select("select * from h_type where delstatus=0");
         			if(list.size()!=0){
         				for(HashMap m:list){
         			%>

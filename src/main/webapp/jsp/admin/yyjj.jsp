@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="java.dao.CommDAO"%>
-<%@page import="java.util.Info"%>
-<%@page import="java.util.PageManager"%>
+<%@page import="com.hosp.dao.CommDAO"%>
+<%@page import="com.hosp.util.Info"%>
+<%@page import="com.hosp.util.PageManager"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -11,9 +11,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
-    <title>My JSP 'right.jsp' starting page</title>
-    
+
+      <title>预约挂号系统管理平台</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-java.control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -36,12 +35,12 @@ body {
 -->
 </style>
   </head>
-  <%CommDAO java.com.hosp.dao = new CommDAO();
+  <%CommDAO dao = new CommDAO();
   String id =  request.getParameter("id");
-  HashMap map = com.hosp.dao.select("select * from yyjj where id='1'").get(0);
+  HashMap map = dao.select("select * from yyjj where id='1'").get(0);
    %>
   <body>
-  <form action="/Demo/tms?ac=yyjj" method="post" name="f1" >
+  <form action="./common/hospitalMark.do" method="get" name="f1" >
   <input type="hidden" id="id" name="id" />
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -69,23 +68,22 @@ body {
 </table>
 </form>
 <script type="text/javascript">
-	function window.onload() { 
+    window().onload=function () {
 
-var of = new FCKeditor("remark");
-of.BasePath="/Demo/fckeditor/";
-of.Height = "285";
-of.ToolbarSet="Default";
-of.ReplaceTextarea();
+        var of = new FCKeditor("remark");
+        of.BasePath="/Demo/fckeditor/";
+        of.Height = "285";
+        of.ToolbarSet="Default";
+        of.ReplaceTextarea();
 
-if(top.location != self.location){ 
+        if(top.location != self.location){
 
-var a = window.parent.document.getElementsByTagName('iframe'); 
+            var a = window.parent.document.getElementsByTagName('iframe');
 
-for (var i=0; i<a.length; i++){ 
+            for (var i=0; i<a.length; i++){
 
-if (a[i].name == self.name) {a[i].height = document.body.scrollHeight+350; return;}}} 
-
-}
+                if (a[i].name == self.name) {a[i].height = document.body.scrollHeight+350; return;}}}
+    }
 <%
 String suc = (String)request.getAttribute("suc");
 String no = (String)request.getAttribute("no");
@@ -103,4 +101,4 @@ location.replace("/Demo/admin/yyjj.jsp");
 </script>
   </body>
 </html>
-<%=Info.tform(map)%>
+<%--<%=Info.tform(map)%>--%>

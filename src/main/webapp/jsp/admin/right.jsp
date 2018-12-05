@@ -8,9 +8,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
-    <title>My JSP 'right.jsp' starting page</title>
-    
+
+    <title>预约挂号系统管理平台</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-java.control" content="no-cache">
 	<meta http-equiv="expires" content="0">    

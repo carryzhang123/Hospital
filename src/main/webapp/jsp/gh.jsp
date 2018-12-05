@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@page import="java.dao.CommDAO"%>
+<%@page import="com.hosp.dao.CommonDao"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -20,7 +20,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<LINK rel=stylesheet type=text/css href="files/exp_book_login_files/css.css">
+      <script language="javascript" type="text/javascript"  src="./jsp/js/calendar/WdatePicker.js"></script>
+      <LINK rel=stylesheet type=text/css href="./jsp/js/calendar/skin/WdatePicker.css">
 
   </head>
   
@@ -29,10 +30,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <jsp:include page="index_top.jsp"></jsp:include>
 <jsp:include page="navframe.jsp"></jsp:include>
 </center>
- <%CommDAO java.com.hosp.dao = new CommDAO();
+ <%CommonDao dao=new CommonDao();
         String id = request.getParameter("id");
+        id=String.valueOf(2);
         HashMap user = (HashMap)session.getAttribute("user"); 
-        HashMap map = com.hosp.dao.select("select * from ks where id='"+id+"'").get(0);
+        HashMap map = dao.select("select * from h_type where id='"+id+"'").get(0);
         %>
   <FORM onsubmit="return ck()" method=post name=f1 action="/Demo/tms?ac=ghadd">
   <input type="hidden" id="uname" name="uname" value="<%=user.get("uname") %>"/>
@@ -62,8 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <TR>
                 <TD height=40 width="41%" align=right>预约日期： </TD>
                 <TD height=40 width="59%"><INPUT id=yytime class=inputtxt 
-                  type=text name=yytime  onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" readonly==true></TD></TR>
-                  <script type="text/javascript" src="/Demo/js/calendar/WdatePicker.js"></script>
+                  type=text name=yytime  onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"></TD></TR>
               <TR>
                 <TD height=40 width="41%" align=right>病人姓名： </TD>
                 <TD height=40 width="59%"><INPUT id=tname class=inputtxt 
@@ -118,11 +119,9 @@ if(suc!=null)
 {
  %>
  alert("操作成功");
-location.replace("/Demo/myyy.jsp");
+location.replace("/Demo/pation_orders.jsp");
  <%}%>
   </script>
-  <center>
-<jsp:include page="index_bottom.jsp"></jsp:include>
-</center>
+  <%@ include file="./index_bottom.jsp"%>
   </body>
 </html>

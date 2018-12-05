@@ -9,7 +9,7 @@
 <head>
     <base href="<%=basePathNav%>">
 
-    <title>My JSP 'navframe.jsp' starting page</title>
+    <title>医院网上预约系统</title>
 
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-java.control" content="no-cache">

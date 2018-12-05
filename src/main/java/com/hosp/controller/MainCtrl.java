@@ -78,7 +78,7 @@ public class MainCtrl extends HttpServlet {
 		{
 			    String uname = request.getParameter("uname");
 			    String upass = request.getParameter("upass");
-			    	String sql = "select * from sysuser where uname='"+uname+"' and upass='"+upass+"' and delstatus='0' ";
+			    	String sql = "select * from h_doctor  where uname='"+uname+"' and upass='"+upass+"' and delstatus='0' ";
 			    
 			    	List<HashMap> list = dao.select(sql);
 			    	if(list.size()==1)
@@ -102,7 +102,7 @@ public class MainCtrl extends HttpServlet {
 		{
 			    String uname = request.getParameter("uname");
 			    String upass = request.getParameter("upass");
-			    	String sql = "select * from br where uname='"+uname+"' and upass='"+upass+"' and isblack='no' and delstatus='0'  ";
+			    	String sql = "select * from h_user where uname='"+uname+"' and upass='"+upass+"' and isblack='no' and delstatus='0'  ";
 			    
 			    	List<HashMap> list = dao.select(sql);
 			    	if(list.size()==1)
@@ -222,7 +222,7 @@ public class MainCtrl extends HttpServlet {
 				     }
 				    
 				}
-				String csql = "select * from sysuser where uname='"+uname+"'";
+				String csql = "select * from h_doctor  where uname='"+uname+"'";
 			    if(dao.select(csql).size()>0)
 			    {
 			    	request.setAttribute("error", "");
@@ -245,7 +245,7 @@ public class MainCtrl extends HttpServlet {
 		if(ac.equals("sysuseredit"))
 		{
 		    	String id = request.getParameter("id");
-				HashMap map = dao.select("select * from sysuser where id="+id).get(0);
+				HashMap map = dao.select("select * from h_doctor  where id="+id).get(0);
 				try {
 					String uname = "";
 			    	String upass = "";
@@ -325,7 +325,7 @@ public class MainCtrl extends HttpServlet {
 		if(ac.equals("reg"))
 		{
 			    String uname = request.getParameter("uname");
-			    String csql = "select * from br where uname='"+uname+"'";
+			    String csql = "select * from h_user where uname='"+uname+"'";
 			    if(dao.select(csql).size()>0)
 			    {
 			    	request.setAttribute("no", "");
@@ -349,7 +349,7 @@ public class MainCtrl extends HttpServlet {
 			    String uname = request.getParameter("uname");
 			    String oldupass = request.getParameter("oldupass");
 			    
-			    String csql = "select * from br where id='"+user.get("id")+"'";
+			    String csql = "select * from h_user where id='"+user.get("id")+"'";
 			    HashMap map = dao.select(csql).get(0);
 			    if(!oldupass.equals(map.get("upass")))
 			    {
@@ -408,7 +408,7 @@ public class MainCtrl extends HttpServlet {
 			String ysid = request.getParameter("ysid");
 			String rq = request.getParameter("rq");
 			String rs = request.getParameter("rs");
-			ArrayList cklist = (ArrayList)dao.select("select * from yspb where ysid='"+ysid+"' and rq='"+rq+"'");
+			ArrayList cklist = (ArrayList)dao.select("select * from h_d_orders where hdoctor='"+ysid+"' and rq='"+rq+"'");
 			if(cklist.size()>0){
 				request.setAttribute("no", "");
 		    	go("/admin/yspbadd.jsp", request, response);
@@ -431,7 +431,7 @@ public class MainCtrl extends HttpServlet {
 			String ysid = request.getParameter("ysid");
 			String rq = request.getParameter("rq");
 			String uid = user.get("id").toString();
-			ArrayList cklist = (ArrayList)dao.select("select * from yy where ysid='"+ysid+"' and rq='"+rq+"' and uid='"+uid+"'");
+			ArrayList cklist = (ArrayList)dao.select("select * from h_p where hdoctor='"+ysid+"' and rq='"+rq+"' and huser='"+uid+"'");
 			if(cklist.size()>0){
 				request.setAttribute("no", "");
 		    	go("/doctor_plans.jsp?ysid="+ysid, request, response);

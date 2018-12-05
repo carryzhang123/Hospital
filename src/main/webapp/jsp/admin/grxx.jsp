@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="java.dao.CommDAO"%>
-<%@page import="java.util.Info"%>
-<%@page import="java.util.PageManager"%>
+<%@page import="com.hosp.dao.CommDAO"%>
+<%@page import="com.hosp.util.Info"%>
+<%@page import="com.hosp.util.PageManager"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -11,9 +11,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
-    <title>My JSP 'right.jsp' starting page</title>
-    
+
+      <title>预约挂号系统管理平台</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-java.control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -36,11 +35,11 @@ body {
 </style>
   </head>
   <%HashMap admin = (HashMap)session.getAttribute("admin"); 
-   CommDAO java.com.hosp.dao = new CommDAO();
- HashMap map = com.hosp.dao.select("select * from sysuser where id="+admin.get("id")).get(0);
+   CommDAO dao = new CommDAO();
+ HashMap map = dao.select("select * from h_doctor where id="+admin.get("id")).get(0);
   %>
   <body>
-  <form action="/Demo/tms?ac=grxx" method="post" name="f1" onsubmit="return ck()">
+  <form action="./common/patientUpdate.do" method="get" name="f1" onsubmit="return ck()">
   <input type="hidden" id="id" name="id" />
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -99,7 +98,7 @@ body {
         	<div><span class="STYLE3">
         		<select id="ks" name="ks" disabled=disabled>
         			<%
-        			ArrayList<HashMap> list = (ArrayList)com.hosp.dao.select("select * from ks");
+        			ArrayList<HashMap> list = (ArrayList)dao.select("select * from h_type");
         			if(list.size()!=0){
         				for(HashMap m:list){
         			%>
@@ -168,4 +167,4 @@ location.replace("/Demo/admin/grxx.jsp");
 </form>
   </body>
 </html>
-<%=Info.tform(map)%>
+<%--<%=Info.tform(map)%>--%>

@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="java.dao.CommDAO"%>
-<%@page import="java.util.Info"%>
-<%@page import="java.util.PageManager"%>
+<%@page import="com.hosp.dao.CommDAO"%>
+<%@page import="com.hosp.util.Info"%>
+<%@page import="com.hosp.util.PageManager"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -11,9 +11,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
-    <title>My JSP 'right.jsp' starting page</title>
-    
+
+      <title>预约挂号系统管理平台</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-java.control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -22,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<script language=javascript src="/Demo/fckeditor/fckeditor.js"></script>
+	<script language=javascript src="/hospital/jsp/fckeditor/fckeditor.js"></script>
 <style type="text/css">
 <!--
 .STYLE1 {font-size: 12px}
@@ -36,11 +35,11 @@ body {
 -->
 </style>
   </head>
-  <%CommDAO java.com.hosp.dao = new CommDAO();
+  <%CommDAO dao = new CommDAO();
 
    %>
   <body>
-  <form action="/Demo/tms?ac=yspbadd" method="post" name="f1" onsubmit="return ck()">
+  <form action="./common/pbAdd.do" method="get" name="f1" onsubmit="return ck()">
   <input type="hidden" id="id" name="id" />
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -54,9 +53,9 @@ body {
         	<div><span class="STYLE3">
         	<select id="ysid" name="ysid">
     	<option value="">全部</option>
-    	<%ArrayList<HashMap> yslist = (ArrayList<HashMap>)com.hosp.dao.select("select * from sysuser where utype='医生' and delstatus=0");
+    	<%ArrayList<HashMap> yslist = (ArrayList<HashMap>)dao.select("select * from h_doctor where utype='1' and delstatus=0");
     	for(HashMap ysm:yslist){
-    		HashMap ksm = com.hosp.dao.select("select * from ks where id="+ysm.get("ks")).get(0);
+    		HashMap ksm = dao.select("select * from h_type where id="+ysm.get("htype")).get(0);
     	%>
     	<option value="<%=ysm.get("id") %>"><%=ksm.get("name") %>-<%=ysm.get("tname") %></option>
     	<%} %>

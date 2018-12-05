@@ -9,7 +9,7 @@
 <head>
     <base href="<%=basePathTop%>">
 
-    <title>My JSP 'index_top.jsp' starting page</title>
+    <title>医院网上预约系统</title>
 
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-java.control" content="no-cache">
@@ -32,7 +32,7 @@
     <TR>
         <TH scope=row>
             <%
-                HashMap topUser = (HashMap) session.getAttribute("topUser");
+                HashMap topUser = (HashMap) session.getAttribute("user");
             %>
             <form action="searchys.jsp?f=f" method="post">
                 <TABLE  style="margin: 0 auto" border=0 align=right>
@@ -46,10 +46,10 @@
                             <input type="text" id="key9" name="key9" size="5">
                             <input type="submit" value="搜索">
                         </TD>
-                        <TD vAlign=center width=51>|&gt;<A
+                        <TD vAlign=center width=51>|<A
                                 href="./jsp/welcome.jsp">首页</A></TD>
-                        <TD vAlign=center width=71>|&gt;<A
-                                href="./jsp/newscenter.jsp">新闻中心</A></TD>
+                        <%--<TD vAlign=center width=71>|&gt;<A--%>
+                                <%--href="./jsp/pation_orders.jsp">我的预约</A></TD>--%>
                         <TD vAlign=center width=71>|&gt;<A
                                 href="./jsp/yyjj.jsp">医院简介</A></TD>
                         <%if (topUser == null) { %>
@@ -58,14 +58,14 @@
                         <TD vAlign=center width=71>|&gt;<A
                                 href="./jsp/reg.jsp">用户注册</A></TD>
                         <%} else { %>
+                        <%--<TD vAlign=center width=71>|&gt;<A--%>
+                                <%--href="./jsp/searchks.jsp">预约挂号</A></TD>--%>
                         <TD vAlign=center width=71>|&gt;<A
-                                href="./jsp/searchks.jsp">预约挂号</A></TD>
-                        <TD vAlign=center width=71>|&gt;<A
-                                href="./jsp/myyy.jsp">我的预约</A></TD>
+                                href="./jsp/pation_orders.jsp">我的预约</A></TD>
                         <TD vAlign=center width=71>|&gt;<A
                                 href="./jsp/patient_info.jsp">个人信息</A></TD>
                         <TD vAlign=center width=51>|&gt;<A
-                                href="/Demo/tms?ac=bexit"
+                                href="./common/logoutPatient.do"
                         >注销</A></TD>
                         <%} %>
 

@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="java.dao.CommDAO"%>
-<%@page import="java.util.Info"%>
-<%@page import="java.util.PageManager"%>
+<%@page import="com.hosp.dao.CommDAO"%>
+<%@page import="com.hosp.util.Info"%>
+<%@page import="com.hosp.util.PageManager"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -11,9 +11,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
-    <title>My JSP 'right.jsp' starting page</title>
-    
+
+      <title>预约挂号系统管理平台</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-java.control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -35,8 +34,8 @@ body {
 -->
 </style>
   </head>
-  <%CommDAO java.com.hosp.dao = new CommDAO();
-	 String sql = "select * from yy where 1=1  and status='待诊' ";
+  <%CommDAO dao = new CommDAO();
+	 String sql = "select * from h_p where 1=1  and status='待诊' ";
 	 String url = "/Demo/admin/bryy.jsp?1=1";
 	 String key = request.getParameter("key")==null?"":request.getParameter("key");
 	 String stime = request.getParameter("stime")==null?"":request.getParameter("stime");
@@ -44,7 +43,7 @@ body {
 	 String f = request.getParameter("f");
 	 if(f==null)
 	 {
-	 key = Info.getUTFStr(key);
+//	 key = Info.getUTFStr(key);
 	 }
 	 if(!stime.equals(""))
 	 {
@@ -72,15 +71,15 @@ body {
   </tr>
   <tr>
     <td><table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#c9c9c9">
-    <th colspan="9"><span class="STYLE1">
-    预约起止日期：<INPUT id=stime class=inputtxt 
-                  type=text name=stime  onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" readonly==true>
-                  -
-                  <INPUT id=etime class=inputtxt 
-                  type=text name=etime  onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" readonly==true>
-    <script type="text/javascript" src="/Demo/js/calendar/WdatePicker.js"></script>
-    &nbsp;&nbsp;&nbsp;<input type="submit" value="查询" /></span>
-    </th>
+    <%--<th colspan="9"><span class="STYLE1">--%>
+    <%--预约起止日期：<INPUT id=stime class=inputtxt --%>
+                  <%--type=text name=stime  onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" readonly==true>--%>
+                  <%-----%>
+                  <%--<INPUT id=etime class=inputtxt --%>
+                  <%--type=text name=etime  onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" readonly==true>--%>
+    <%--<script type="text/javascript" src="/Demo/js/calendar/WdatePicker.js"></script>--%>
+    <%--&nbsp;&nbsp;&nbsp;<input type="submit" value="查询" /></span>--%>
+    <%--</th>--%>
       <tr>
         <td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">病人姓名</span></strong></div></td>
         <td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">性别</span></strong></div></td>
@@ -96,16 +95,16 @@ body {
       <%String did = request.getParameter("did");
    if(did!=null)
    {
-com.hosp.dao.commOper("delete from yy where id="+did);
+dao.commOper("delete from yy where id="+did);
    }
    PageManager pageManager = PageManager.getPage(url,10, request);
    pageManager.doList(sql);
    PageManager bean= (PageManager)request.getAttribute("page");
    ArrayList<HashMap> nlist=(ArrayList)bean.getCollection();
    	for(HashMap mstu:nlist){
-   		HashMap brm = com.hosp.dao.select("select * from br where id="+mstu.get("uid")).get(0);
-   		HashMap ysm = com.hosp.dao.select("select * from sysuser where id="+mstu.get("ysid")).get(0);
-  		HashMap ksm = com.hosp.dao.select("select * from ks where id="+ysm.get("ks")).get(0);
+   		HashMap brm = dao.select("select * from h_user where id="+mstu.get("huser")).get(0);
+   		HashMap ysm = dao.select("select * from h_doctor  where id="+mstu.get("hdoctor")).get(0);
+  		HashMap ksm = dao.select("select * from h_type where id="+ysm.get("htype")).get(0);
 	    %>
       <tr>
         <td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3"><%=brm.get("tname") %></span></div></td>

@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@page import="java.dao.CommDAO"%>
-<%@page import="java.util.PageManager"%>
+<%@page import="com.hosp.dao.CommonDao"%>
+<%@page import="com.hosp.util.PageManager"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -33,15 +33,16 @@
         <TR>
           <TD vAlign=top >
             <TABLE border=1 cellSpacing=1 cellPadding=1 width="100%" bgcolor="#ffffff"><TBODY>
-              <%CommDAO java.com.hosp.dao = new CommDAO();
+              <%
+              CommonDao dao=new CommonDao();
             String key9 = request.getParameter("key9")==null?"":request.getParameter("key9");;
             String url = "/Demo/searchkeshi.jsp?1=1";
-              String sql = "select * from ks where 1=1 ";
+              String sql = "select * from h_type where 1=1 ";
               if(!key9.equals("")){
             	  sql += " and name like '%"+key9+"%' ";
               }
               sql += "order by id desc";
-              ArrayList<HashMap> list=(ArrayList<HashMap>)com.hosp.dao.select(sql);
+              ArrayList<HashMap> list=(ArrayList<HashMap>)dao.select(sql);
               for(HashMap map:list){%>
               <TR bordercolor="#ffffff">
                 <TD align=right >

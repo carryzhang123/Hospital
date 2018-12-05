@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'exp_book_login.jsp' starting page</title>
+    <title>医院网上预约系统</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-java.control" content="no-cache">
@@ -35,7 +35,7 @@ return false;
   </head>
   
   <body>
-  <FORM onsubmit="return ck()" method=post name="f1" action="/Demo/tms?ac=blogin">
+  <FORM onsubmit="return ck()" method="get" name="f1" action="./common/login.do">
    <TABLE border=0 cellSpacing=0 cellPadding=0 width=720 align=center height=282>
   <TBODY>
   <TR>

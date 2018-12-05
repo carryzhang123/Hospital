@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="java.dao.CommDAO"%>
-<%@page import="java.util.Info"%>
-<%@page import="java.util.PageManager"%>
+<%@page import="com.hosp.dao.CommDAO"%>
+<%@page import="com.hosp.util.Info"%>
+<%@page import="com.hosp.util.PageManager"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -11,9 +11,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
-    <title>My JSP 'right.jsp' starting page</title>
-    
+
+      <title>预约挂号系统管理平台</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-java.control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -35,15 +34,15 @@ body {
 -->
 </style>
   </head>
-  <%CommDAO java.com.hosp.dao = new CommDAO();
-	 String sql = "select * from br where 1=1 and delstatus='0'  ";
+  <%CommDAO dao = new CommDAO();
+	 String sql = "select * from h_user where 1=1 and delstatus='0'  ";
 	 String url = "/Demo/admin/br.jsp?1=1";
 	 String key = request.getParameter("key")==null?"":request.getParameter("key");
 	 String key1 = request.getParameter("key1")==null?"":request.getParameter("key1");
 	 String f = request.getParameter("f");
 	 if(f==null)
 	 {
-	 key = Info.getUTFStr(key);
+//	 key = Info.getUTFStr(key);
 	 }
 	 if(!key.equals(""))
 	 {
@@ -67,9 +66,9 @@ body {
   </tr>
   <tr>
     <td><table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#c9c9c9">
-    <th colspan="8"><span class="STYLE1">按用户名或姓名：<input type="text" id="key" name="key" />&nbsp;&nbsp;&nbsp;
-   <input type="submit" value="查询" /></span>
-    </th>
+    <%--<th colspan="8"><span class="STYLE1">按用户名或姓名：<input type="text" id="key" name="key" />&nbsp;&nbsp;&nbsp;--%>
+   <%--<input type="submit" value="查询" /></span>--%>
+    <%--</th>--%>
       <tr>
         <td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">用户名</span></strong></div></td>
         <td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">密码</span></strong></div></td>
@@ -83,17 +82,17 @@ body {
       <%String did = request.getParameter("did");
    if(did!=null)
    {
-com.hosp.dao.commOper("update  br set delstatus='1' where id="+did);
+dao.commOper("update  br set delstatus='1' where id="+did);
    }
    String hid = request.getParameter("hid");
    if(hid!=null)
    {
-com.hosp.dao.commOper("update  br set isblack='yes' where id="+hid);
+dao.commOper("update  br set isblack='yes' where id="+hid);
    }
    String bid = request.getParameter("bid");
    if(bid!=null)
    {
-com.hosp.dao.commOper("update  br set isblack='no' where id="+bid);
+dao.commOper("update  br set isblack='no' where id="+bid);
    }
    PageManager pageManager = PageManager.getPage(url,10, request);
    pageManager.doList(sql);

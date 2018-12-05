@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link href="admin/images/main.css" rel="stylesheet" type="text/css" />
+<link href="./jsp/admin/images/main.css" rel="stylesheet" type="text/css" />
   </head>
   
   <body>
@@ -27,50 +27,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		       <div id="left_menu"></div>
 			   <div id="left_tree">
 			        <div id="tree_icon">
-					   <div id="yh"><img src="admin/images/user.gif" />用户信息</div>
-					   <div id="system"><img src="admin/images/system.gif" />系统管理</div>
+					   <div id="yh"><img src="./jsp/admin/images/user.gif" />用户信息</div>
+					   <div id="system"><img src="./jsp/admin/images/system.gif" />系统管理</div>
 					</div>
 					<div id="tree_text">
 				<%HashMap admin = (HashMap)session.getAttribute("admin");  
-				if(admin.get("utype").equals("管理员")){
+				if(admin.get("utype").equals("0")){
 				%>
 						<li class="tree_li">
-					     	<span class="list_img"><img src="admin/images/list_img.gif" /></span><a href="admin/yyjj.jsp" target="m">医院简介</a>
+					     	<span class="list_img"><img src="./jsp/admin/images/list_img.gif" /></span><a href="./jsp/admin/yyjj.jsp" target="m">医院简介</a>
+					     </li>
+					     <%--<li class="tree_li">--%>
+					     	<%--<span class="list_img"><img src="./jsp/admin/images/list_img.gif" /></span><a href="./jsp/admin/notice.jsp" target="m">新闻管理</a>--%>
+					     <%--</li>--%>
+					     <li class="tree_li">
+					     	<span class="list_img"><img src="./jsp/admin/images/list_img.gif" /></span><a href="./jsp/admin/sysuser.jsp" target="m">医生管理</a>
 					     </li>
 					     <li class="tree_li">
-					     	<span class="list_img"><img src="admin/images/list_img.gif" /></span><a href="admin/notice.jsp" target="m">新闻管理</a>
+					     	<span class="list_img"><img src="./jsp/admin/images/list_img.gif" /></span><a href="./jsp/admin/yspb.jsp" target="m">医生排班</a>
 					     </li>
 					     <li class="tree_li">
-					     	<span class="list_img"><img src="admin/images/list_img.gif" /></span><a href="admin/sysuser.jsp" target="m">医生管理</a>
-					     </li>
-					     <li class="tree_li">
-					     	<span class="list_img"><img src="admin/images/list_img.gif" /></span><a href="admin/yspb.jsp" target="m">医生排班</a>
-					     </li>
-					     <li class="tree_li">
-					     	<span class="list_img"><img src="admin/images/list_img.gif" /></span><a href="admin/ks.jsp" target="m">科室管理</a>
+					     	<span class="list_img"><img src="./jsp/admin/images/list_img.gif" /></span><a href="./jsp/admin/ks.jsp" target="m">科室管理</a>
 					     </li>
 						 <li class="tree_li">
-						 	<span class="list_img"><img src="admin/images/list_img.gif" /></span><a href="admin/br.jsp" target="m">病人管理</a>
+						 	<span class="list_img"><img src="./jsp/admin/images/list_img.gif" /></span><a href="./jsp/admin/br.jsp" target="m">病人管理</a>
 						 </li>
 						 <li class="tree_li">
-							<span class="list_img"><img src="admin/images/list_img.gif" /></span><a href="admin/bryy.jsp" target="m">病人预约</a>
+							<span class="list_img"><img src="./jsp/admin/images/list_img.gif" /></span><a href="./jsp/admin/bryy.jsp" target="m">病人预约</a>
 						 </li>
 						 <li class="tree_li">
-							<span class="list_img"><img src="admin/images/list_img.gif" /></span><a href="admin/bryy1.jsp" target="m">历史预约</a>
+							<span class="list_img"><img src="./jsp/admin/images/list_img.gif" /></span><a href="./jsp/admin/bryy1.jsp" target="m">历史预约</a>
 						 </li>
 				<%}else{ %>
 						<li class="tree_li">
-							<span class="list_img"><img src="admin/images/list_img.gif" /></span><a href="admin/yybr.jsp" target="m">预约病人</a>
+							<span class="list_img"><img src="./jsp/admin/images/list_img.gif" /></span><a href="./jsp/admin/yybr.jsp" target="m">预约病人</a>
 						 </li>
 						 <li class="tree_li">
-							<span class="list_img"><img src="admin/images/list_img.gif" /></span><a href="admin/wcbr.jsp" target="m">预约完成</a>
+							<span class="list_img"><img src="./jsp/admin/images/list_img.gif" /></span><a href="./jsp/admin/wcbr.jsp" target="m">预约完成</a>
 						 </li>
 						 <li class="tree_li">
-							<span class="list_img"><img src="admin/images/list_img.gif" /></span><a href="admin/mypb.jsp" target="m">我的排班</a>
+							<span class="list_img"><img src="./jsp/admin/images/list_img.gif" /></span><a href="./jsp/admin/mypb.jsp" target="m">我的排班</a>
 						 </li>
 				<%} %>
 						 <li class="tree_li">
-						 <span class="list_img"><img src="admin/images/list_img.gif" /></span><a href="admin/grxx.jsp" target="m">个人信息</a>
+						 <span class="list_img"><img src="./jsp/admin/images/list_img.gif" /></span><a href="./jsp/admin/grxx.jsp" target="m">个人信息</a>
 						 </li>
 
 					</div>

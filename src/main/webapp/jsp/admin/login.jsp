@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page import="javafx.scene.control.Alert" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -24,10 +25,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <center>
-  	<form action="/Demo/tms?ac=login" method="post" name="f1" onsubmit="return ck()">
+  	<form action="./common/adminlogin.do" method="get" name="f1" onsubmit="return ck()">
     <div id="login">
 	     <div id="top">
-		      <div id="top_left"><img src="admin/images/login_03.gif" /></div>
+		      <div id="top_left"><img src="./jsp/admin/images/login_03.gif" /></div>
 			  <div id="top_center"></div>
 		 </div>
 		 <div id="center">
@@ -58,6 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</form>
 	</center>
   </body>
+
   <script type="text/javascript">
   	function ck(){
   		if(f1.uname.value==""){
@@ -68,5 +70,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			return false;
   		}
   	}
+
+    <%
+if(request.getParameter("no")!=null){
+%>
+	  alert("用户名或密码错误！");
+	  <%}%>
   </script>
 </html>

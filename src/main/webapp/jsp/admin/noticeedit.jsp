@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="java.dao.CommDAO"%>
-<%@page import="java.util.Info"%>
-<%@page import="java.util.PageManager"%>
+<%@page import="com.hosp.dao.CommDAO"%>
+<%@page import="com.hosp.util.Info"%>
+<%@page import="com.hosp.util.PageManager"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'right.jsp' starting page</title>
+    <title>预约挂号系统管理平台</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-java.control" content="no-cache">
@@ -36,9 +36,9 @@ body {
 -->
 </style>
   </head>
-  <%CommDAO java.com.hosp.dao = new CommDAO();
+  <%CommDAO dao = new CommDAO();
   String id =  request.getParameter("id");
-  HashMap map = com.hosp.dao.select("select * from notice where id="+id).get(0);
+  HashMap map = dao.select("select * from notice where id="+id).get(0);
    %>
   <body>
   <form action="/Demo/tms?ac=noticeedit&id=<%=id %>" method="post" name="f1" >
@@ -110,4 +110,4 @@ location.replace("/Demo/admin/notice.jsp");
 </script>
   </body>
 </html>
-<%=Info.tform(map)%>
+<%--<%=Info.tform(map)%>--%>

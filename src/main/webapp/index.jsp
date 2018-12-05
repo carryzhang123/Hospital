@@ -19,7 +19,7 @@
     <%
         HashMap user1 = (HashMap) session.getAttribute("user");
         if (user1 != null) {
-            response.sendRedirect("./jsp/readme.jsp");
+            response.sendRedirect("/hospital/jsp/readme.jsp");
         } else {
     %>
 </center>

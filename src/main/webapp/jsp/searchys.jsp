@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@page import="java.dao.CommDAO"%>
-<%@page import="java.util.PageManager"%>
+<%@page import="com.hosp.dao.CommDAO"%>
+<%@page import="com.hosp.util.PageManager"%>
+<%@ page import="com.hosp.dao.CommonDao" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -43,30 +44,28 @@
             <TABLE border=1 cellSpacing=1 cellPadding=1 width="100%" bgcolor="#ffffff"><TBODY>
             <TR bordercolor="#ffffff">
               <%
-              CommDAO java.com.hosp.dao = new CommDAO();
+              CommonDao dao=new CommonDao();
               String sql1 = "select  * from sysuser where utype='医生' ";
               if(!key9.equals("")){
             	  sql1 += " and tname like '%"+key9+"%' ";
               }
               sql1 += " order by id desc ";
-              ArrayList<HashMap> list1 = (ArrayList<HashMap>)com.hosp.dao.select(sql1);
+              ArrayList<HashMap> list1 = (ArrayList<HashMap>)dao.select(sql1);
               int i=0;
               for(HashMap map1:list1){
-            	  HashMap ksm = com.hosp.dao.select("select * from ks where id="+map1.get("ks")).get(0);
+            	  HashMap ksm = dao.select("select * from h_type where id="+map1.get("htype")).get(0);
               i++;%>
               
                 <TD align=right >
                 <a href="doctor_plans.jsp?ysid=<%=map1.get(" text/javascript">
   	
-  	<%
+ <%
 String no = (String)request.getAttribute("no");
-if(no!=null)
-{
+if(no!=null) {
  %>
  alert("用户名或密码错误");
  <%}%>
   </script>
-
   <center>
 <jsp:include page="index_bottom.jsp"></jsp:include>
 </center>

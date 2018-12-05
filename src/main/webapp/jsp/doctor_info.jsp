@@ -31,7 +31,9 @@
 </center>
 <%CommonDao dao = new CommonDao();
     String id = request.getParameter("id");
-    HashMap map = dao.select("select * from h_doctor where htype='"+id+"'").get(0);
+    List<HashMap> list=dao.select("select * from h_type where id='"+id+"'");
+
+    HashMap map = list.size()==0?new HashMap():list.get(0);
 %>
 <FORM onsubmit="return ck()" method=post name=f1 action="/Demo/tms?ac=ghadd">
     <input type="hidden" id="id" name="id" value="<%=map.get("id") %>"/>
@@ -73,7 +75,10 @@
                                                     <a href="./jsp/doctor_plans.jsp?ysid=<%=m.get("id") %>"> <%=m.get("tname") %>(<%=m.get("level") %>)</a><br />
                                                 </td>
 
-                                                <%if(i%5==0){out.print("</tr><tr>");}}%><%} %>
+                                                <%--<%if(i%5==0) %>--%>
+                                                <%--{out.print("</tr><tr>");}--%>
+                                                <%} %>
+                                            <%}%>
                                             </tr>
                                         </table>
                                     </TD>
@@ -96,7 +101,7 @@ if(no!=null)
    {
     %>
     alert("操作成功");
-    location.replace("./jsp/myyy.jsp");
+    // location.replace("./jsp/pation_orders.jsp");
     <%}%>
 </script>
 <center>

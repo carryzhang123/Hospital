@@ -102,7 +102,7 @@
                                                 <Td>操作</Td>
                                             </tr>
                                             <%
-                                                List<HashMap> pblist = dao.select("select * from h_doctor_plans where hdoctor= '" + ysid + "'   ");
+                                                List<HashMap> pblist = dao.select("select * from h_d_orders where hdoctor= '" + ysid + "'   ");
                                                 for (HashMap pbm : pblist) {
                                             %>
                                             <tr>
@@ -110,7 +110,7 @@
                                                 </Td>
                                                 <Td>
                                                     <%
-                                                        ArrayList yylist = (ArrayList) dao.select("select * from h_p where h_doctor='" + ysid + "' and rq='" + pbm.get("rq") + "' ");
+                                                        ArrayList yylist = (ArrayList) dao.select("select * from h_p where hdoctor='" + ysid + "' and rq='" + pbm.get("rq") + "' ");
                                                         int sys = Integer.parseInt(pbm.get("rs").toString()) - yylist.size();
                                                     %>
                                                     可预约：<%=pbm.get("rs") %>人 （已预约：<%=yylist.size() %>人）
@@ -157,7 +157,10 @@ if(no!=null)
    {
     %>
     alert("挂号成功，请于有效期内前往就诊");
-    location.replace("/Demo/doctor_plans.jsp?ysid=" + ysid);
+
+    window.location.href="./jsp/pation_orders.jsp";
+
+    // location.replace("./jsp/doctor_plans.jsp?ysid=" + ysid);
     <%}%>
 </script>
 <center>

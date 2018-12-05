@@ -30,7 +30,7 @@ public class DocterController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addDoctor(String uname, String upass, String tname, String sex, String age, String tel, String idcard) {
         CommDAO dao = new CommDAO();
-        String csql = "select * from br where uname='" + uname + "'";
+        String csql = "select * from h_user where uname='" + uname + "'";
         jdbcTemplate.execute(csql);
         if (dao.select(csql).size() > 0) {
             request.setAttribute("no", "");

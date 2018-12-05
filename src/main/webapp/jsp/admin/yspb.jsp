@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="java.dao.CommDAO"%>
-<%@page import="java.util.Info"%>
-<%@page import="java.util.PageManager"%>
+<%@page import="com.hosp.dao.CommDAO"%>
+<%@page import="com.hosp.util.Info"%>
+<%@page import="com.hosp.util.PageManager"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -11,9 +11,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
-    <title>My JSP 'right.jsp' starting page</title>
-    
+
+      <title>预约挂号系统管理平台</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-java.control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -35,16 +34,16 @@ body {
 -->
 </style>
   </head>
-  <%CommDAO java.com.hosp.dao = new CommDAO();
-	 String sql = "select * from yspb where 1=1  ";
-	 String url = "/Demo/admin/yspb.jsp?1=1";
+  <%CommDAO dao = new CommDAO();
+	 String sql = "select * from h_d_orders where 1=1  ";
+	 String url = "./jsp/admin/yspb.jsp?1=1";
 	 String key = request.getParameter("key")==null?"":request.getParameter("key");
 	 String key1 = request.getParameter("key1")==null?"":request.getParameter("key1");
 	 String key2 = request.getParameter("key2")==null?"":request.getParameter("key2");
 	 String f = request.getParameter("f");
 	 if(f==null)
 	 {
-	 key = Info.getUTFStr(key);
+//	 key = Info.getUTFStr(key);
 	 }
 	 if(!key.equals(""))
 	 {
@@ -62,7 +61,7 @@ body {
 	 sql+=" order by rq desc";
 %>
   <body>
-  <form action="admin/yspb.jsp?f=f" method="post">
+  <form action="./jsp/admin/yspb.jsp?f=f" method="post">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td height="30"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -74,8 +73,8 @@ body {
               
               <td width="60"><table width="90%" border="0" cellpadding="0" cellspacing="0">
                   <tr>
-                    <td class="STYLE1"><div align="center"><img src="admin/images/001.gif" width="14" height="14" /></div></td>
-                    <td class="STYLE1"><div align="center"><a href="admin/yspbadd.jsp">新增</a></div></td>
+                    <td class="STYLE1"><div align="center"><img src="./jsp/admin/images/001.gif" width="14" height="14" /></div></td>
+                    <td class="STYLE1"><div align="center"><a href="./jsp/admin/yspbadd.jsp">新增</a></div></td>
                   </tr>
               </table></td>
              
@@ -87,21 +86,21 @@ body {
   </tr>
   <tr>
     <td><table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#c9c9c9">
-    <th colspan="5"><span class="STYLE1">
-    按医生：<select id="key" name="key">
-    	<option value="">全部</option>
-    	<%ArrayList<HashMap> yslist = (ArrayList<HashMap>)com.hosp.dao.select("select * from sysuser where utype='医生' and delstatus=0");
-    	for(HashMap ysm:yslist){
-    		HashMap ksm = com.hosp.dao.select("select * from ks where id="+ysm.get("ks")).get(0);
-    	%>
-    	<option value="<%=ysm.get("id") %>" <%if(key.equals(ysm.get("id"))){out.print("selected==selected");} %>><%=ksm.get("name") %>-<%=ysm.get("tname") %></option>
-    	<%} %>
-    </select>&nbsp;&nbsp;&nbsp;
-    起止时间：<input type="text" id="key1" name="key1" value="<%=key1 %>" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>-
-                 <input type="text" id="key2" name="key2" value="<%=key2 %>" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
-   <input type="submit" value="查询" /></span>
-   <script type="text/javascript" src="/Demo/js/calendar/WdatePicker.js"></script>
-    </th>
+    <%--<th colspan="5"><span class="STYLE1">--%>
+    <%--按医生：<select id="key" name="key">--%>
+    	<%--<option value="">全部</option>--%>
+    	<%--<%ArrayList<HashMap> yslist = (ArrayList<HashMap>)dao.select("select * from h_doctor where utype='1' and delstatus=0");--%>
+    	<%--for(HashMap ysm:yslist){--%>
+    		<%--HashMap ksm = dao.select("select * from h_type where id="+ysm.get("htype")).get(0);--%>
+    	<%--%>--%>
+    	<%--<option value="<%=ysm.get("id") %>" <%if(key.equals(ysm.get("id"))){out.print("selected==selected");} %>><%=ksm.get("name") %>-<%=ysm.get("tname") %></option>--%>
+    	<%--<%} %>--%>
+    <%--</select>&nbsp;&nbsp;&nbsp;--%>
+    <%--起止时间：<input type="text" id="key1" name="key1" value="<%=key1 %>" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>---%>
+                 <%--<input type="text" id="key2" name="key2" value="<%=key2 %>" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>--%>
+   <%--<input type="submit" value="查询" /></span>--%>
+   <%--<script type="text/javascript" src="/Demo/js/calendar/WdatePicker.js"></script>--%>
+    <%--</th>--%>
       <tr>
       	<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">科室</span></strong></div></td>
         <td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">医生</span></strong></div></td>
@@ -112,22 +111,22 @@ body {
       <%String did = request.getParameter("did");
    if(did!=null)
    {
-com.hosp.dao.commOper("delete from yspb where id="+did);
+dao.commOper("delete from h_d_orders where id="+did);
    }
    PageManager pageManager = PageManager.getPage(url,10, request);
    pageManager.doList(sql);
    PageManager bean= (PageManager)request.getAttribute("page");
    ArrayList<HashMap> nlist=(ArrayList)bean.getCollection();
    	for(HashMap mstu:nlist){
-   		HashMap ym=com.hosp.dao.select("select * from sysuser where id="+mstu.get("ysid")+"").get(0);
-   		HashMap km=com.hosp.dao.select("select * from ks where id="+ym.get("ks")+"").get(0);
+   		HashMap ym=dao.select("select * from h_doctor where id="+mstu.get("hdoctor")+"").get(0);
+   		HashMap km=dao.select("select * from h_type where id="+ym.get("htype")+"").get(0);
 	    %>
       <tr>
         <td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3"><%=km.get("name") %></span></div></td>
         <td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3"><%=ym.get("tname") %></span></div></td>
         <td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3"><%=mstu.get("rq") %></span></div></td>
         <td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3"><%=mstu.get("rs") %></span></div></td>
-        <td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3"><a href="admin/yspbedit.jsp?id=<%=mstu.get("id") %>">修改</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="admin/yspb.jsp?did=<%=mstu.get("id") %>">删除</a></span></div></td>
+        <td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3"><a href="./jsp/admin/yspbedit.jsp?id=<%=mstu.get("id") %>">修改</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="./jsp/admin/yspb.jsp?did=<%=mstu.get("id") %>">删除</a></span></div></td>
       </tr>
       <%} %>
       <tr>
