@@ -38,14 +38,14 @@
                 <TABLE  style="margin: 0 auto" border=0 align=right>
                     <TBODY>
                     <TR>
-                        <TD vAlign=center>
-                            <select id="key8" name="key8">
-                                <option value="1">科室</option>
-                                <option value="2">医生</option>
-                            </select>
-                            <input type="text" id="key9" name="key9" size="5">
-                            <input type="submit" value="搜索">
-                        </TD>
+                        <%--<TD vAlign=center>--%>
+                            <%--<select id="key8" name="key8">--%>
+                                <%--<option value="1">科室</option>--%>
+                                <%--<option value="2">医生</option>--%>
+                            <%--</select>--%>
+                            <%--<input type="text" id="key9" name="key9" size="5">--%>
+                            <%--<input type="submit" value="搜索">--%>
+                        <%--</TD>--%>
                         <TD vAlign=center width=51>|<A
                                 href="./jsp/welcome.jsp">首页</A></TD>
                         <%--<TD vAlign=center width=71>|&gt;<A--%>

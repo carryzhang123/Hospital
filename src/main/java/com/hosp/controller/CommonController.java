@@ -273,103 +273,94 @@ public class CommonController {
      * @return
      */
     @RequestMapping(value = "/doctorAdd", method = RequestMethod.GET)
-    public String doctorAdd() {
-            try {
-                String uname = "";
-                String upass = "";
-                String tname = "";
-                String sex = "";
-                String tel = "";
-                String ks = "";
-                String zc = "";
-                String idcard = "";
-                String filename = "";
-                String remark = "";
-                request.setCharacterEncoding("utf-8");
-                RequestContext requestContext = new ServletRequestContext(request);
-                if (FileUpload.isMultipartContent(requestContext)) {
-                    DiskFileItemFactory factory = new DiskFileItemFactory();
-                    factory.setRepository(new File(request.getRealPath("/upfile/") + "/"));
-                    ServletFileUpload upload = new ServletFileUpload(factory);
-                    upload.setSizeMax(100 * 1024 * 1024);
-                    List items = new ArrayList();
-                    items = upload.parseRequest(request);
+    public String doctorAdd(String uname,String upass,String tname,String sex,String tel,String ks,String zc,String idcard,String filename,String remark) {
+        try {
+            request.setCharacterEncoding("utf-8");
+            RequestContext requestContext = new ServletRequestContext(request);
+            if (FileUpload.isMultipartContent(requestContext)) {
+                DiskFileItemFactory factory = new DiskFileItemFactory();
+                factory.setRepository(new File(request.getRealPath("/upfile/") + "/"));
+                ServletFileUpload upload = new ServletFileUpload(factory);
+                upload.setSizeMax(100 * 1024 * 1024);
+                List items = new ArrayList();
+                items = upload.parseRequest(request);
 
-                    uname = ((FileItem) items.get(0)).getString();
-                    uname = Info.getUTFStr(uname);
+                uname = ((FileItem) items.get(0)).getString();
+                uname = Info.getUTFStr(uname);
 
-                    upass = ((FileItem) items.get(1)).getString();
-                    upass = Info.getUTFStr(upass);
+                upass = ((FileItem) items.get(1)).getString();
+                upass = Info.getUTFStr(upass);
 
-                    tname = ((FileItem) items.get(2)).getString();
-                    tname = Info.getUTFStr(tname);
+                tname = ((FileItem) items.get(2)).getString();
+                tname = Info.getUTFStr(tname);
 
-                    sex = ((FileItem) items.get(3)).getString();
-                    sex = Info.getUTFStr(sex);
+                sex = ((FileItem) items.get(3)).getString();
+                sex = Info.getUTFStr(sex);
 
-                    tel = ((FileItem) items.get(4)).getString();
-                    tel = Info.getUTFStr(tel);
+                tel = ((FileItem) items.get(4)).getString();
+                tel = Info.getUTFStr(tel);
 
-                    ks = ((FileItem) items.get(5)).getString();
-                    ks = Info.getUTFStr(ks);
+                ks = ((FileItem) items.get(5)).getString();
+                ks = Info.getUTFStr(ks);
 
-                    zc = ((FileItem) items.get(6)).getString();
-                    zc = Info.getUTFStr(zc);
+                zc = ((FileItem) items.get(6)).getString();
+                zc = Info.getUTFStr(zc);
 
-                    idcard = ((FileItem) items.get(7)).getString();
-                    idcard = Info.getUTFStr(idcard);
+                idcard = ((FileItem) items.get(7)).getString();
+                idcard = Info.getUTFStr(idcard);
 
-                    remark = ((FileItem) items.get(9)).getString();
-                    remark = Info.getUTFStr(remark);
+                remark = ((FileItem) items.get(9)).getString();
+                remark = Info.getUTFStr(remark);
 
-                    FileItem fileItem = (FileItem) items.get(8);
+                FileItem fileItem = (FileItem) items.get(8);
 
-                    if (fileItem.getName() != null && fileItem.getSize() != 0) {
-                        File fullFile = new File(fileItem.getName());
-                        filename = Info.generalFileName(fullFile.getName());
-                        File newFile = new File(request.getRealPath("/upfile/") + "/" + filename);
-                        try {
-                            fileItem.write(newFile);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    } else {
+                if (fileItem.getName() != null && fileItem.getSize() != 0) {
+                    File fullFile = new File(fileItem.getName());
+                    filename = Info.generalFileName(fullFile.getName());
+                    File newFile = new File(request.getRealPath("/upfile/") + "/" + filename);
+                    try {
+                        fileItem.write(newFile);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-
-                }
-                String csql = "select * from h_doctor  where uname='" + uname + "'";
-                if (commonDao.select(csql).size() > 0) {
-                    request.setAttribute("error", "");
-                    return "/jsp/admin/sysuseradd.jsp";
                 } else {
-                    String sql = "insert sysuser (uname,upass,tname,sex,tel,ks,zc,utype,img,delstatus,idcard,remark) values('" + uname + "','" + upass + "','" + tname + "','" + sex + "','" + tel + "','" + ks + "','" + zc + "','医生','" + filename + "','0','" + idcard + "','" + remark + "')";
-                    //String sql = "insert into info (title,content,type,savetime,img) values ('"+title+"','"+mt+"','1','"+Info.getDateStr()+"','"+filename+"') ";
-                    commonDao.commOper(sql);
-                    request.setAttribute("suc", "");
-                    return "/jsp/admin/sysuseradd.jsp";
                 }
-            } catch (Exception e1) {
-                e1.printStackTrace();
+
+            }
+            String csql = "select * from h_doctor  where uname='" + uname + "'";
+            if (commonDao.select(csql).size() > 0) {
                 request.setAttribute("error", "");
                 return "/jsp/admin/sysuseradd.jsp";
+            } else {
+                String sql = "insert h_doctor (uname,upass,tname,sex,tel,htype,level,utype,img,delstatus,idcard,remark) values('" + uname + "','" + upass + "','" + tname + "','" + sex + "','" + tel + "','" + ks + "','" + zc + "','1','" + filename + "','0','" + idcard + "','" + remark + "')";
+                //String sql = "insert into info (title,content,type,savetime,img) values ('"+title+"','"+mt+"','1','"+Info.getDateStr()+"','"+filename+"') ";
+                commonDao.commOper(sql);
+                request.setAttribute("suc", "");
+                return "/jsp/admin/sysuser.jsp";
             }
+        } catch (Exception e1) {
+            e1.printStackTrace();
+            request.setAttribute("error", "");
+            return "/jsp/admin/sysuseradd.jsp";
+        }
     }
 
     /**
      * 添加排班
+     *
      * @param ysid
      * @param rq
      * @param rs
      * @return
      */
     @RequestMapping(value = "/pbAdd", method = RequestMethod.GET)
-    public String pbAdd(String ysid,String rq,String rs){
-        ArrayList cklist = (ArrayList)commonDao.select("select * from h_d_orders where hdoctor='"+ysid+"' and rq='"+rq+"'");
-        if(cklist.size()>0){
+    public String pbAdd(String ysid, String rq, String rs) {
+        ArrayList cklist = (ArrayList) commonDao.select("select * from h_d_orders where hdoctor='" + ysid + "' and rq='" + rq + "'");
+        if (cklist.size() > 0) {
             request.setAttribute("no", "");
             return "/jsp/admin/yspbadd.jsp";
-        }else{
-            commonDao.commOper("insert into yspb (ysid,rq,rs) values ('"+ysid+"','"+rq+"','"+rs+"') ");
+        } else {
+            commonDao.commOper("insert into yspb (ysid,rq,rs) values ('" + ysid + "','" + rq + "','" + rs + "') ");
             request.setAttribute("suc", "");
             return "/jsp/admin/yspbadd.jsp";
         }
@@ -377,22 +368,24 @@ public class CommonController {
 
     /**
      * 修改排班
+     *
      * @return
      */
     @RequestMapping(value = "/pbEdit", method = RequestMethod.GET)
-    public String pbEdit(String id,String rs){
-        commonDao.commOper("update h_d_orders set rs='"+rs+"' where id="+id);
+    public String pbEdit(String id, String rs) {
+        commonDao.commOper("update h_d_orders set rs='" + rs + "' where id=" + id);
         request.setAttribute("suc", "");
-        return "/jsp/admin/yspbedit.jsp?id="+id;
+        return "/jsp/admin/yspbedit.jsp?id=" + id;
     }
 
     /**
      * 增加科室
+     *
      * @return
      */
     @RequestMapping(value = "/ksAdd", method = RequestMethod.GET)
-    public String kbAdd(String name,String type,String remark){
-        String sql = "insert into h_type (name,type,remark,delstatus) values('"+name+"','"+type+"','"+remark+"','0')";
+    public String kbAdd(String name, String type, String remark) {
+        String sql = "insert into h_type (name,type,remark,delstatus) values('" + name + "','" + type + "','" + remark + "','0')";
         commonDao.commOper(sql);
         request.setAttribute("suc", "");
         return "/jsp/admin/ksadd.jsp";
@@ -400,11 +393,12 @@ public class CommonController {
 
     /**
      * 修改科室
+     *
      * @return
      */
     @RequestMapping(value = "/ksEdit", method = RequestMethod.GET)
-    public String kbEdit(String id,String name,String type,String remark){
-        String sql = "update h_type set name='"+name+"',type='"+type+"',remark='"+remark+"' where id='"+id+"'";
+    public String kbEdit(String id, String name, String type, String remark) {
+        String sql = "update h_type set name='" + name + "',type='" + type + "',remark='" + remark + "' where id='" + id + "'";
         commonDao.commOper(sql);
         request.setAttribute("suc", "");
         request.setAttribute("id", id);

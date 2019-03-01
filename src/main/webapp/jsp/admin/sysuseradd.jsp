@@ -1,7 +1,6 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.hosp.dao.CommDAO"%>
-<%@page import="com.hosp.util.Info"%>
-<%@page import="com.hosp.util.PageManager"%>
+<%@ page language="java" import="com.hosp.dao.CommDAO" pageEncoding="utf-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.HashMap"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
